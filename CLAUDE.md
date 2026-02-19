@@ -64,10 +64,29 @@ Deploy en Vercel: https://github.com/benja902/rbrunidos
   - `src/lib/data.ts` variable `WHATSAPP_NUMBER`
 
 ## Commits clave
+- `62c319c` — catálogo domos.json + system prompt grounded + ReactMarkdown en chat
+- `cf215ff` — rate limiting e input validation en /api/chat
+- `cb2b480` — chatbot IA flotante + logos + fixes Hero/Navbar/Footer + anchor IDs
+- `5b1d3a4` — CLAUDE.md inicial con contexto del proyecto
 - `835a994` — visualizador 3D completo
 - `7f7a003` — upgrade React 19 + Three.js packages
 - `80fc954` — estado sin visualizador (para revertir si hace falta)
 - `5a11b9a` — initial commit
+
+## Para revertir el chat IA (los 3 commits)
+```bash
+git revert 62c319c cf215ff cb2b480
+```
+
+## Para revertir solo el catálogo JSON + Markdown (mantener chat básico)
+```bash
+git revert 62c319c
+```
+
+## Para revertir solo el rate limiting
+```bash
+git revert cf215ff
+```
 
 ## Para revertir el visualizador
 ```bash
