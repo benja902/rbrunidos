@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { buildWhatsAppLink } from "@/lib/data";
@@ -39,13 +40,15 @@ export default function Navbar() {
         className="max-w-7xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between"
       >
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <span className="w-7 h-7 rounded-full bg-accent flex items-center justify-center">
-            <span className="w-3 h-3 rounded-full bg-bg" />
-          </span>
-          <span className="font-serif text-[17px] tracking-tight text-ink">
-            RBR Unidos
-          </span>
+        <Link href="/" className="flex items-center" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+          <Image
+            src="/logh4.png"
+            alt="RBR Unidos"
+            width={140}
+            height={40}
+            className="h-20 w-auto"
+            priority
+          />
         </Link>
 
         {/* Desktop nav */}

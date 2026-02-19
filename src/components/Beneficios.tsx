@@ -1,5 +1,7 @@
 "use client";
 
+// comentario de prueba
+
 import { motion } from "framer-motion";
 import {
   CloudLightning, Thermometer, Shield, Zap, Settings, Headphones,

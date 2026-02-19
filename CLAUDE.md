@@ -38,6 +38,25 @@ Deploy en Vercel: https://github.com/benja902/rbrunidos
 - Modo Terreno: click izquierdo = mover domo | click derecho = rotar cámara
 - Scroll = zoom (ambos modos)
 
+## Cambios recientes (esta sesión)
+
+### Navbar (`src/components/Navbar.tsx`)
+- Logo reemplazado: texto → `<Image src="/logh.png" h-12 w-auto />`
+- Logo tiene `onClick` para scroll suave al top cuando ya estás en `/`
+- Link wraps the image: `<Link href="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })>`
+
+### Hero (`src/components/Hero.tsx`)
+- Botones "Ver en mi espacio" y "Ver modelos" cambiados de `motion.a` → `<a>` plain (Framer Motion bloqueaba la navegación por href)
+- `absolute inset-0` del fondo gradiente tiene `pointer-events-none` — sin esto, después de ~1s que terminan las animaciones, ese div bloqueaba los clicks
+- Sección IDs agregados en `page.tsx` para que los anchors funcionen
+
+### page.tsx (`src/app/page.tsx`)
+- Wrappers con IDs para navegación anchor:
+  - `<div id="modelos">`, `<div id="visualizador">`, `<div id="proyectos">`, `<div id="proceso">`, `<div id="faq">`
+
+### layout.tsx (`src/app/layout.tsx`)
+- `scroll-smooth` agregado al `<html>` para scroll CSS nativo
+
 ## Pendiente importante
 - Reemplazar número de WhatsApp `51999999999` en:
   - `src/components/visualizador/ConfiguratorPanel.tsx` línea ~18

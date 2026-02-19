@@ -1,5 +1,7 @@
 "use client";
 
+// comentario de prueba
+
 import { useRef, useEffect, MutableRefObject, useCallback, useState } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";

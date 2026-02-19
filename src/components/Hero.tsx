@@ -15,7 +15,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-bg">
       {/* Background subtle texture */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(47,58,46,0.05),transparent_60%)]" />
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top_right,rgba(47,58,46,0.05),transparent_60%)]" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 py-28 lg:py-24 lg:items-start">
         {/* Left: copy */}
@@ -55,26 +55,20 @@ export default function Hero() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3">
-            <motion.a
+            <a
               href="#visualizador"
-              whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.99 }}
-              animate={{ boxShadow: ["0 0 0 0 rgba(47,58,46,0)", "0 0 0 8px rgba(47,58,46,0.06)", "0 0 0 0 rgba(47,58,46,0)"] }}
-              transition={{ duration: 2.4, repeat: 1, ease: "easeInOut" }}
-              className="inline-flex items-center justify-center gap-2 bg-accent text-white font-medium text-[15px] px-7 py-4 rounded-3xl hover:bg-accent/90 transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-accent text-white font-medium text-[15px] px-7 py-4 rounded-3xl hover:bg-accent/90 active:scale-[0.99] transition-all"
             >
               Ver en mi espacio
               <ArrowRight size={16} />
-            </motion.a>
+            </a>
 
-            <motion.a
+            <a
               href="#modelos"
-              whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.99 }}
-              className="inline-flex items-center justify-center gap-2 bg-transparent text-ink font-medium text-[15px] px-7 py-4 rounded-3xl border border-[rgba(20,20,20,0.12)] hover:border-[rgba(20,20,20,0.25)] transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-transparent text-ink font-medium text-[15px] px-7 py-4 rounded-3xl border border-[rgba(20,20,20,0.12)] hover:border-[rgba(20,20,20,0.25)] active:scale-[0.99] transition-all"
             >
               Ver modelos
-            </motion.a>
+            </a>
           </div>
 
           {/* Social proof */}

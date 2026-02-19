@@ -12,7 +12,7 @@ import Testimonios from "@/components/Testimonios";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
+import DomoChatFloating from "@/components/DomoChatFloating";
 
 export default function Home() {
   return (
@@ -21,19 +21,19 @@ export default function Home() {
       <main>
         <Hero />
         <SelectorUso />
-        <Modelos />
-        <Visualizador />
+        <div id="modelos"><Modelos /></div>
+        <div id="visualizador"><Visualizador /></div>
         <Ambientes />
-        <Proyectos />
-        <Proceso />
+        <div id="proyectos"><Proyectos /></div>
+        <div id="proceso"><Proceso /></div>
         <Beneficios />
         <Extras />
         <Testimonios />
-        <FAQ />
+        <div id="faq"><FAQ /></div>
         <CTA />
       </main>
       <Footer />
-      <WhatsAppButton />
+      <DomoChatFloating />
     </>
   );
 }

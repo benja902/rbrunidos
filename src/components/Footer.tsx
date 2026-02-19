@@ -1,4 +1,6 @@
+"use client";
 import Link from "next/link";
+import Image from "next/image";
 import { buildWhatsAppLink } from "@/lib/data";
 import { Instagram, Mail, MapPin } from "lucide-react";
 
@@ -20,9 +22,17 @@ export default function Footer() {
           {/* Brand */}
           <div className="max-w-xs">
             <div className="flex items-center gap-2 mb-4">
-              <span className="w-7 h-7 rounded-full bg-accent flex items-center justify-center">
-                <span className="w-3 h-3 rounded-full bg-white/80" />
-              </span>
+              {/* Logo */}
+              <Link href="/" className="flex items-center" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+                <Image
+                  src="/logo2.png"
+                  alt="RBR Unidos"
+                  width={140}
+                  height={40}
+                  className="h-12 w-auto"
+                  priority
+                />
+              </Link>
               <span className="font-serif text-[17px] text-white tracking-tight">RBR Unidos</span>
             </div>
             <p className="text-[14px] leading-relaxed text-white/50 mb-4">
