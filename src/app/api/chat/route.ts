@@ -12,9 +12,59 @@ Formato:
 2) Justificación
 3) Siguiente paso.`;
 
+// Simple in-memory rate limit: max 20 requests per IP por ventana de 1 minuto
+const rateMap = new Map<string, { count: number; reset: number }>();
+const RATE_LIMIT = 20;
+const RATE_WINDOW_MS = 60_000;
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const entry = rateMap.get(ip);
+  if (!entry || now > entry.reset) {
+    rateMap.set(ip, { count: 1, reset: now + RATE_WINDOW_MS });
+    return false;
+  }
+  if (entry.count >= RATE_LIMIT) return true;
+  entry.count++;
+  return false;
+}
+
 export async function POST(req: NextRequest) {
   try {
-    const { messages } = await req.json();
+    // Rate limiting por IP
+    const ip =
+      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+    if (isRateLimited(ip)) {
+      return NextResponse.json(
+        { error: "Demasiadas solicitudes. Intenta en un momento." },
+        { status: 429 }
+      );
+    }
+
+    const body = await req.json();
+    const { messages } = body;
+
+    // Validaciones de entrada
+    if (!Array.isArray(messages)) {
+      return NextResponse.json({ error: "Formato inválido" }, { status: 400 });
+    }
+    if (messages.length > 40) {
+      return NextResponse.json(
+        { error: "Historial demasiado largo" },
+        { status: 400 }
+      );
+    }
+    for (const msg of messages) {
+      if (!["user", "assistant"].includes(msg.role)) {
+        return NextResponse.json({ error: "Rol inválido" }, { status: 400 });
+      }
+      if (typeof msg.content !== "string" || msg.content.length > 2000) {
+        return NextResponse.json(
+          { error: "Mensaje demasiado largo" },
+          { status: 400 }
+        );
+      }
+    }
 
     const token = process.env.GITHUB_MODELS_TOKEN;
     const model = process.env.GITHUB_MODELS_MODEL || "openai/gpt-4o-mini";
