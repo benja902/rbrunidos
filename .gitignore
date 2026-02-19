@@ -38,3 +38,6 @@ next-env.d.ts
 *.jpg
 *.jpeg
 !public/**
+
+# Claude Code temp directories
+tmpclaude-*/
