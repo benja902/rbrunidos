@@ -1,16 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
+import domos from "@/data/domos.json";
+
+const catalogo = JSON.stringify(domos, null, 2);
 
 const SYSTEM_PROMPT = `Eres asesor experto de RBR Cúpulas Geodésicas en Perú.
-Recomienda domos según:
-- número de personas
-- tipo de uso
-- clima o ubicación
-No inventes precios.
-Si falta info, haz máximo 2 preguntas.
-Formato:
-1) Recomendación
-2) Justificación
-3) Siguiente paso.`;
+
+CATÁLOGO OFICIAL:
+${catalogo}
+
+Reglas:
+- Usa solo los modelos del catálogo oficial
+- No inventes tamaños ni modelos que no existen
+- No inventes precios bajo ninguna circunstancia
+- Si no existe un modelo exacto para lo pedido, recomienda el más cercano y explica por qué
+- Si falta información del cliente, haz máximo 2 preguntas antes de recomendar
+- Responde siempre en español profesional y cordial
+
+Formato obligatorio en Markdown:
+1) **Recomendación**: nombre del modelo (diámetro)
+2) **Justificación**: por qué ese modelo es el adecuado
+3) **Siguiente paso**: qué debe hacer el cliente para avanzar`;
 
 // Simple in-memory rate limit: max 20 requests per IP por ventana de 1 minuto
 const rateMap = new Map<string, { count: number; reset: number }>();

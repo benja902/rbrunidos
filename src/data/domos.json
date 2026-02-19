@@ -1,0 +1,29 @@
+{
+  "domos": [
+    {
+      "diametro_m": 6,
+      "area_m2": 28,
+      "altura_m": 3.5,
+      "capacidad": "2-4",
+      "ideal": ["glamping", "oficina", "jardin"]
+    },
+    {
+      "diametro_m": 8,
+      "area_m2": 50,
+      "altura_m": 4.6,
+      "capacidad": "4-8",
+      "ideal": ["glamping premium", "cafeteria", "eventos intimos"]
+    },
+    {
+      "diametro_m": 10,
+      "area_m2": 78,
+      "altura_m": 5.8,
+      "capacidad": "20-60",
+      "ideal": ["eventos", "restaurantes", "showrooms"]
+    }
+  ],
+  "reglas": {
+    "no_inventar_precios": true,
+    "si_no_hay_modelo_exacto": "recomienda el más cercano y pide confirmación"
+  }
+}

@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Send, MessageCircle } from "lucide-react";
+import ReactMarkdown from "react-markdown";
 
 type Role = "user" | "assistant";
 
@@ -175,24 +176,39 @@ export default function DomoChatFloating() {
                   key={i}
                   className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                 >
-                  <div
-                    className="max-w-[84%] px-4 py-2.5 rounded-2xl text-[13px] leading-relaxed whitespace-pre-wrap"
-                    style={
-                      msg.role === "user"
-                        ? {
-                            background: "#2F3A2E",
-                            color: "rgba(255,255,255,0.92)",
-                            borderBottomRightRadius: "6px",
-                          }
-                        : {
-                            background: "rgba(255,255,255,0.08)",
-                            color: "rgba(255,255,255,0.80)",
-                            borderBottomLeftRadius: "6px",
-                          }
-                    }
-                  >
-                    {msg.content}
-                  </div>
+                  {msg.role === "user" ? (
+                    <div
+                      className="max-w-[84%] px-4 py-2.5 rounded-2xl text-[13px] leading-relaxed whitespace-pre-wrap"
+                      style={{
+                        background: "#2F3A2E",
+                        color: "rgba(255,255,255,0.92)",
+                        borderBottomRightRadius: "6px",
+                      }}
+                    >
+                      {msg.content}
+                    </div>
+                  ) : (
+                    <div
+                      className="max-w-[84%] px-4 py-2.5 rounded-2xl text-[13px] leading-relaxed"
+                      style={{
+                        background: "rgba(255,255,255,0.08)",
+                        color: "rgba(255,255,255,0.80)",
+                        borderBottomLeftRadius: "6px",
+                      }}
+                    >
+                      <ReactMarkdown
+                        components={{
+                          p: ({ children }) => <p className="my-1 leading-snug">{children}</p>,
+                          strong: ({ children }) => <strong className="font-semibold text-white/95">{children}</strong>,
+                          ol: ({ children }) => <ol className="pl-4 my-1 list-decimal space-y-0.5">{children}</ol>,
+                          ul: ({ children }) => <ul className="pl-4 my-1 list-disc space-y-0.5">{children}</ul>,
+                          li: ({ children }) => <li className="leading-snug">{children}</li>,
+                        }}
+                      >
+                        {msg.content}
+                      </ReactMarkdown>
+                    </div>
+                  )}
                 </div>
               ))}
 
